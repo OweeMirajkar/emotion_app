@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detection App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Detection App</h1>
+        <form method="POST" id="emotionForm">
+            <textarea name="text" id="textInput" placeholder="Type your text here..." rows="4">{{ text }}</textarea><br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        <div id="result">
+            {% if emotions %}
+            <h2>Detected Emotions:</h2>
+            <ul>
+                {% for emotion, score in emotions.items() %}
+                    <li>{{ emotion.capitalize() }}: {{ '%.2f'|format(score) }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
